@@ -5,4 +5,4 @@ if [ ! "$?" = "0" ]; then
 fi
 
 echo Installing ved...
-deno run -A --unstable --reload -q @ORIGIN@/cli.ts --upgrade --local --host @ORIGIN@
+deno run -A --unstable --reload -q @ORIGIN@/cli.ts :upgrade --local --host @ORIGIN@
