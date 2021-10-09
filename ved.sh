@@ -1,1 +1,1 @@
-deno run --unstable -A -r -q src/cli.ts $*
+deno run --unstable -A --no-check -q src/cli.ts $*

@@ -12,7 +12,7 @@ export async function upgrade(host: string, local: boolean) {
       console.log('Sorry but ved does not support Windows.');
       Deno.exit(1);
     }
-    await deno([ 'install', '-f', '-r', '-A', '-n', 'ved', '--unstable', `${host}/cli.ts` ]);
+    await deno([ 'install', '-f', '-r', '-A', '-n', 'ved', '--unstable', '--no-check', `${host}/cli.ts` ]);
   } else {
     await deno([ 'run', '-q', '-r', '-A', '--unstable', `${host}/cli.ts`, ':upgrade', '--local', '--host', host ]);
   }
