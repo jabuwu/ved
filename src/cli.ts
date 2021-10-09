@@ -75,10 +75,11 @@ if (operation === 'command') {
     console.log(`  ${repository}:${branch}`);
   }
   console.log('');
-  console.log('flags:');
-  console.log('  --init    - init with a repository');
-  console.log('  --upgrade - upgrade ved to the latest version');
-  console.log('  --reload  - reload cache for a command');
+  console.log('commands:');
+  console.log('  :init         - init with a repository');
+  console.log('  :upgrade      - upgrade ved to the latest version');
+  console.log('  :reload       - reload cache for a command');
+  console.log('  your commands - run any commands from your repository');
   console.log('');
   console.log('...there\'s not much here, yet');
 }
