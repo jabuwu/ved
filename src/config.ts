@@ -1,4 +1,5 @@
 import { ensureDir } from 'https://deno.land/std@0.110.0/fs/mod.ts';
+import { getAppConfigDir } from './util.ts';
 
 export interface VedConfig {
   vedHost?: string;
@@ -6,24 +7,20 @@ export interface VedConfig {
   branch?: string;
 }
 
-export function getConfigDir() {
-  const home = Deno.env.get('HOME');
-  if (!home) {
-    console.log('The HOME environment variable must be set.');
-    Deno.exit(1);
-  }
-  return `${home}/.config/ved`;
+export async function getVedConfigDir() {
+  return await getAppConfigDir('ved');
 }
 
 export async function getConfig(): Promise<VedConfig> {
   try {
-    return JSON.parse(await Deno.readTextFile(`${getConfigDir()}/config.json`));
+    return JSON.parse(await Deno.readTextFile(`${await getVedConfigDir()}/config.json`));
   } catch (_err) {
     return {};
   }
 }
 
 export async function setConfig(obj: Partial<VedConfig>) {
-  await ensureDir(getConfigDir());
-  await Deno.writeTextFile(`${getConfigDir()}/config.json`, JSON.stringify(Object.assign(await getConfig(), obj), null, 2));
+  const configDir = await getVedConfigDir();
+  await ensureDir(configDir);
+  await Deno.writeTextFile(`${configDir}/config.json`, JSON.stringify(Object.assign(await getConfig(), obj), null, 2));
 }
