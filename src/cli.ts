@@ -30,7 +30,7 @@ if (operation === 'command') {
   } else {
     const { repository, branch } = await getConfig();
     if (!repository || !branch) {
-      console.log('ved is not configured, please run ved --init');
+      console.log('ved is not configured, please run ved :init');
       Deno.exit(1);
     }
     await deno([ 'run', '--unstable', '-A', '-q', `https://raw.githubusercontent.com/${repository}/${branch}/${args._[0]}/index.ts` ]);
