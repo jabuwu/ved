@@ -33,7 +33,7 @@ if (operation === 'command') {
       console.log('ved is not configured, please run ved :init');
       Deno.exit(1);
     }
-    await deno([ 'run', '--unstable', '-A', '-q', `https://raw.githubusercontent.com/${repository}/${branch}/${args._[0]}/index.ts` ]);
+    await deno([ 'run', '--unstable', '-A', '-q', `https://raw.githubusercontent.com/${repository}/${branch}/${args._[0]}/index.ts`, ...Deno.args.slice(1) ]);
   }
 } else if (operation === 'init') {
   const args = parse(Deno.args.slice(1));
@@ -61,7 +61,7 @@ if (operation === 'command') {
     const command = args._[0];
     const { repository, branch } = await getConfig();
     if (!repository || !branch) {
-      console.log('ved is not configured, please run ved --init');
+      console.log('ved is not configured, please run ved :init');
       Deno.exit(1);
     }
     await deno([ 'cache', '-r', '--unstable', `https://raw.githubusercontent.com/${repository}/${branch}/${command}/index.ts` ]);
